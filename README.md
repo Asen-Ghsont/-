@@ -67,12 +67,72 @@ web包：
 
 ## 2 如何配置
 
-方法一，建议没有基础知识的人使用：
+### 2.1 配置方法
 
-1.  确认自己的mysql数据库账户密码。
-2.  
+1.  在官网下载Tomcat 10.1.8，不需要配置环境变量。
 
+2.  在IDEA启动按钮的选择框内，配置Tomcat：
 
+    1.  在应用服务器（Application sever）下选择你所下载的Tomcat地址。
+    2.  将JRE设置为JDK20。
+    3.  将Deployment下的应用内容（Application context）清空。
+
+3.  确认自己的mysql用户名和密码。
+
+4.  在service包下的ServiceFactory的此段代码下：
+
+    ```java
+    static {
+        Properties properties = new Properties();
+        properties.put("databaseName", "person");
+        TableFactory.setConnectConfig(properties);
+    }
+    ```
+
+    在这段代码中，通过properties.put()放置所需要的信息，类似于HashMap放入你的数据库账户和密码，以及对应的数据库的名字（该数据库需要先创建）。例如：
+
+    ```java
+    static {
+        Properties properties = new Properties();
+        properties.put("databaseName", "person");
+    	properties.put("username", "root");
+        properties.put("password", "123456");
+        TableFactory.setConnectConfig(properties);
+    }
+    ```
+
+    注意：orm项目设置了默认账户名密码（root，123456），若你密码如此相同，则不需要设置。
+
+### 2.2 出现问题解决方案
+
+**1. Tomcat启动后404，网址不响应**
+
+此时为配置问题：
+
+-   确保你所打开的是CampusPersonnelManagementSystem项目。
+
+-   确保你的JDK满足需求。
+
+-   Tomcat启动配置确保URL为：
+
+    ```java
+    http://localhost:8080/login/index.html
+    ```
+
+-   Tomcat启动配置中的Deployment确定有对应的war exploded包，并确定Application context中没有任何内容。
+
+-   若仍然失败，联系邮箱ghsont@qq.com。
+
+**2. 启动成功，无法注册登录**
+
+此时为数据库问题：
+
+-   确保账户、密码正确。
+-   确定该数据库是否存在。
+
+**3. 测试存在问题**
+
+请读者自身排查原因，本人测试正常。
 
 
 
