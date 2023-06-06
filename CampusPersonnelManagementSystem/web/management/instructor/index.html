@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>班导师管理</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../temple/temple.css">
+</head>
+
+<body>
+<h1>班导师管理系统</h1>
+<div class="container">
+    <table id="instructor-table">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="instructor-table-body">
+        <!-- 更多班导师数据 -->
+        </tbody>
+    </table>
+    <div id="pagination">
+        <span id="current-page"></span>/<span id="total-pages"></span>
+    </div>
+    <div class="button-container">
+        <button id="previous-page-button" onclick="previousPage()">上一页</button>
+        <button id="add-instructor-button" class="add-button" onclick="showAddInstructorModal()">添加班导师</button>
+        <button id="next-page-button" onclick="nextPage()">下一页</button>
+    </div>
+</div>
+
+<!-- 添加班导师模态框 -->
+<div id="add-instructor-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('add-instructor-modal')">&times;</span>
+        <form onsubmit="addInstructor(event)">
+            <h2>添加班导师</h2>
+            <input type="text" placeholder="编号" name="instructorId" required>
+            <input type="text" placeholder="姓名" name="name" required>
+            <input type="text" placeholder="性别" name="gender" required>
+            <input type="number" placeholder="年龄" name="age" required>
+            <div class="button-container">
+                <button type="submit">提交</button>
+                <button type="button" class="cancel-button" onclick="closeModal('add-instructor-modal')">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 删除班导师确认框 -->
+<div id="delete-confirmation-modal" class="modal">
+    <div class="modal-content">
+        <h2>确认删除班导师</h2>
+        <p>确定要删除该班导师吗？</p>
+        <div class="button-container">
+            <button>确定</button>
+            <button onclick="closeModal('delete-confirmation-modal')">取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑班导师模态框 -->
+<div id="edit-instructor-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('edit-instructor-modal')">&times;</span>
+        <form onsubmit="editInstructor(event)">
+            <h2>编辑班导师</h2>
+            <input type="text" placeholder="编号" name="editInstructorId" readonly>
+            <input type="text" placeholder="姓名" name="editName" required>
+            <input type="text" placeholder="性别" name="editGender" required>
+            <input type="number" placeholder="年龄" name="editAge" required>
+            <div class="button-container">
+                <button type="submit">保存</button>
+                <button type="button" class="cancel-button" onclick="closeModal('edit-instructor-modal')">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="script.js"></script>
+<script src="../temple/temple.js"></script>
+</html>

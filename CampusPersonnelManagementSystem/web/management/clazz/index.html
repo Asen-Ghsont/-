@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <title>班级管理</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../temple/temple.css">
+</head>
+
+<body>
+<h1>班级管理系统</h1>
+<div class="container">
+    <table id="class-table">
+        <thead>
+        <tr>
+            <th>班级号</th>
+            <th>名称</th>
+            <th>所在系</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="class-table-body">
+        <!-- 更多班级数据 -->
+        </tbody>
+    </table>
+    <div id="pagination">
+        <span id="current-page"></span>/<span id="total-pages"></span>
+    </div>
+    <div class="button-container">
+        <button id="previous-page-button" onclick="previousPage()">上一页</button>
+        <button id="add-class-button" class="add-button" onclick="showAddClazzModal()">添加班级</button>
+        <button id="next-page-button" onclick="nextPage()">下一页</button>
+    </div>
+</div>
+
+<!-- 添加班级模态框 -->
+<div id="add-class-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('add-class-modal')">&times;</span>
+        <form onsubmit="addClazz(event)">
+            <h2>添加班级</h2>
+            <input type="text" placeholder="班级号" name="classId" required>
+            <input type="text" placeholder="名称" name="name" required>
+            <input type="text" placeholder="所在系" name="department" required>
+            <div class="button-container">
+                <button type="submit">提交</button>
+                <button type="button" class="cancel-button" onclick="closeModal('add-class-modal')">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 删除班级确认框 -->
+<div id="delete-confirmation-modal" class="modal">
+    <div class="modal-content">
+        <h2>确认删除班级</h2>
+        <p>确定要删除该班级吗？</p>
+        <div class="button-container">
+            <button>确定</button>
+            <button onclick="closeModal('delete-confirmation-modal')">取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑班级模态框 -->
+<div id="edit-class-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('edit-class-modal')">&times;</span>
+        <form onsubmit="editClazz(event)">
+            <h2>编辑班级</h2>
+            <input type="text" placeholder="班级号" name="editClassId" readonly>
+            <input type="text" placeholder="名称" name="editName" required>
+            <input type="text" placeholder="所在系" name="editDepartment" required>
+            <div class="button-container">
+                <button type="submit">保存</button>
+                <button type="button" class="cancel-button" onclick="closeModal('edit-class-modal')">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="script.js"></script>
+<script src="../temple/temple.js"></script>
+</body>
+
+</html>
